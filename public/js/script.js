@@ -4,6 +4,14 @@ let userNames;
 let typingnameSet = new Set();
 var typingName = "";
 
+
+
+var siteWidth = 1280;
+var scale = screen.width / siteWidth
+
+document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=' + siteWidth + ', initial-scale=' + scale + '');
+
+
 const usernameCatcher = () => {
     let loaderPrompt = prompt("Enter your name : ", "your name here");
     userNames = loaderPrompt;
