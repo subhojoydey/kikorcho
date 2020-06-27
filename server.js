@@ -19,27 +19,21 @@ app.get('/', (req, res) => {
 app.use(express.static(__dirname + '/public'));
 
 
-const tableAdder = (name) => {
-    table.add(name);
-};
-
-const tableDeleter = (name) => {
-    table.delete(name);
-};
 
 io.on('connection', function(socket) {
     socket.on('typingUsername', function(typingUsername) {
         if (typingUsername.function != "remove") {
-            tableAdder(typingUsername.usernames);
+            table.add(typingUsername.usernames);
         } else {
-            setTimeout(function() {
-                tableDeleter(typingUsername.usernames);
-            }, 2000);
+
+            console.log("deletingf");
+            table.delete(typingUsername.usernames);
+
         }
         //console.log("sending table" + table);
-
+        console.log(table);
         io.emit('typingUsername', Array.from(table));
-        table.clear();
+        //table.clear();
         console.count(table.size);
     });
 

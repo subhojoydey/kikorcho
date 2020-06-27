@@ -54,10 +54,11 @@ socket.on('typingUsername', function(typing) {
     if (typing.length == 0) {
         $('#typingPrompt').text("");
     } else if (typing.length != 0) {
+        console.log(typing);
         typing.forEach(function(entry) {
             typingName = typingName.concat(" " + entry);
         });
-        console.log(typingName);
+        console.log("This is the one:  " + typingName);
         //console.log(typing.length);
         $('#typingPrompt').text(typingName + " is typing .... ");
         typingName = "";
