@@ -1,21 +1,33 @@
 header {
-    background-color: #1ea78d;
-    height: 45px;
-    width: 100%;
-    border-top: 5px solid #062033;
+    background: linear-gradient(rgb(43, 99, 109), rgb(26, 161, 155));
+    border-radius: 25px;
+    height: 55px;
+    width: 98%;
+    left: 1%;
+    border: 2px solid #062033;
     color: #fff;
-    left: 0;
     position: absolute;
-    top: 0;
+    top: 1%;
 }
 
 header p {
-    padding-left: 20px;
+    padding: 10px 0 0 25px;
+    font-size: 18px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+header img {
+    height: 80%;
+    padding-top: 5px;
+    padding-left: 17px;
+    width: 4%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    background-image: url('/../img/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
     font: 13px Helvetica, Arial;
     height: 100vh;
 }
@@ -23,35 +35,46 @@ body {
 #formChat {
     display: block;
     margin-top: 0em;
-    background: #fff;
-    padding-top: 3px;
+    background: rgb(32, 32, 32);
     position: absolute;
     bottom: 0;
     width: 100%;
-    border-color: #000;
     border-top-style: solid;
-    border-top-width: 1px;
+    border-top-width: 7px;
+    border-bottom-style: solid;
+    border-bottom-width: 7px;
     overflow: auto;
-    height: 44px;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    text-align: center;
 }
 
 #formChat input {
-    border-style: solid;
-    border-width: 1px;
+    color: white;
+    padding-left: 30px;
+    background: rgb(81, 83, 83);
     padding: 10px;
     width: 85%;
-    margin-right: .5%;
+    border-radius: 25px;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    outline: none;
+    border: none;
 }
 
 #formChat button {
     width: 9%;
-    background: rgb(130, 224, 255);
+    background: rgb(51, 243, 250);
+    border-radius: 25px;
     border: none;
     padding: 10px;
     margin-left: 2%;
 }
 
-#displayChat {
+#parentDisplay {
+    color: #fff;
     padding: 10px 0 0 10px;
     height: calc(100vh - 138px);
     width: calc(100% - 20px);
@@ -59,4 +82,25 @@ body {
     margin: 10px 0 10px 10px;
     top: 50px;
     position: absolute;
+}
+
+#displayChat li {
+    background: linear-gradient(rgb(139, 84, 47), rgb(197, 149, 45));
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    border: 10px;
+    border: 2px solid rgb(83, 107, 116);
+    width: 40%;
+}
+
+#ownChat li {
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(rgb(43, 99, 109), rgb(26, 161, 155));
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    color: #fff;
+    width: 40%;
 }

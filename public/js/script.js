@@ -6,37 +6,32 @@ var typingName = "";
 
 
 
-var siteWidth = 650;
-var scale = screen.width / siteWidth;
-
-document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=' + siteWidth + ', initial-scale=' + scale + '');
-
-
 const usernameCatcher = () => {
     let loaderPrompt = prompt("Enter your name : ", "your name here");
     userNames = loaderPrompt;
-    //console.log(userNames);
 };
 
 document.onload = usernameCatcher();
+var colors = ['#ff0000', '#00ff00', '#0000ff'];
+var random_color = colors[Math.floor(Math.random() * colors.length)];
 
 
 $(document).ready(function() {
     $("#formChat").submit((e) => {
         e.preventDefault();
         let userResponse = $("#userResponse").val();
-        socket.emit('username', userNames);
-        socket.emit('message', $('#userResponse').val());
+        socket.emit('message', {
+            'usernames': userNames,
+            'response': $('#userResponse').val()
+        });
         $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
         $("#userResponse").val("");
         timeoutFunction();
         return false;
     });
 
-
-
     $("#userResponse").keypress(() => {
-        socket.emit('typingUsername', {
+        socket.emit('typingFunction', {
             'usernames': userNames,
             'function': ' is typing...   '
         });
@@ -49,7 +44,7 @@ $(document).ready(function() {
 
     const timeoutFunction = () => {
         typingTimer = setTimeout(() => {
-            socket.emit('typingUsername', {
+            socket.emit('typingFunction', {
                 'usernames': userNames,
                 'function': "remove"
             });
@@ -58,27 +53,25 @@ $(document).ready(function() {
 });
 
 
-socket.on('typingUsername', function(typing) {
+socket.on('typingFunction', function(typing) {
     if (typing.length == 0) {
         $('#typingPrompt').text("");
     } else if (typing.length != 0) {
-        console.log(typing);
         typing.forEach(function(entry) {
             typingName = typingName.concat(" " + entry);
         });
-        console.log("This is the one:  " + typingName);
-        //console.log(typing.length);
         $('#typingPrompt').text(typingName + " is typing .... ");
         typingName = "";
     }
 });
 
-socket.on('username', function(username) {
-    $('#displayChat').append(username);
-});
 
 socket.on('message', function(msg) {
-    $('#displayChat').append(":    " + msg + "<br>");
+    if (msg.usernames == userNames) {
+        $('#ownChat').append("<li>" + msg.usernames + "<br>" + msg.response + "<br>");
+        $('#title').css('color', random_color);
+    } else
+        $('#displayChat').append("<li>" + msg.usernames + "<br>" + msg.response + "<br>");
 });
 
 

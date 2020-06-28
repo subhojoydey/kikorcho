@@ -5,19 +5,17 @@
 <head>
     <title>Document</title>
     <link href="css/style.css" rel="stylesheet">
-    <meta name="viewport" content="width=devide-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 
 <body id="contentBody">
-
-
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
 
     <header id="headerName">
+        <img src="img/logo.png" alt="Girl in a jacket">
         <p id="typingPrompt"></p>
     </header>
 
@@ -28,8 +26,10 @@
         </form>
     </div>
 
-    <div id="displayChat"></div>
-
+    <ul id="parentDisplay">
+        <div id="displayChat"></div>
+        <div id="ownChat"></div>
+    </ul>
 
 </body>
 

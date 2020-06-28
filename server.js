@@ -21,25 +21,15 @@ app.use(express.static(__dirname + '/public'));
 
 
 io.on('connection', function(socket) {
-    socket.on('typingUsername', function(typingUsername) {
-        if (typingUsername.function != "remove") {
-            table.add(typingUsername.usernames);
+    socket.on('typingFunction', function(typingFunction) {
+        if (typingFunction.function != "remove") {
+            table.add(typingFunction.usernames);
         } else {
-
-            console.log("deletingf");
-            table.delete(typingUsername.usernames);
-
+            table.delete(typingFunction.usernames);
         }
-        //console.log("sending table" + table);
-        console.log(table);
-        io.emit('typingUsername', Array.from(table));
-        //table.clear();
-        console.count(table.size);
+        io.emit('typingFunction', Array.from(table));
     });
 
-    socket.on('username', function(username) {
-        io.emit('username', username);
-    });
     socket.on('message', function(msg) {
         io.emit('message', msg);
     });
