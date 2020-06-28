@@ -75,8 +75,8 @@ body {
 #displayChat {
     color: #fff;
     padding: 10px 0 0 10px;
-    height: calc(100vh - 138px);
-    width: calc(100% - 20px);
+    height: calc(100vh - 158px);
+    width: calc(100% - 100px);
     overflow-y: scroll;
     margin: 25px 0 10px 10px;
     top: 50px;
@@ -93,6 +93,11 @@ body {
     color: #fff;
     width: 40%;
     list-style: none;
+}
+
+p {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size: 1.2em;
 }
 
 .ownli {
