@@ -70,7 +70,6 @@ socket.on('message', function(msg) {
     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
     if (msg.usernames == userNames) {
         $('#displayChat').append("<li class='ownli'> <p style='text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 1.2em; color:#" + randomColor + ";'>" + msg.usernames + ":</p>" + msg.response + "<br></li>");
-        $('#title').css('color', random_color);
     } else
         $('#displayChat').append("<li  class='displayli'> <p style='text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 1.2em; color:#" + randomColor + ";'>" + msg.usernames + "</p>" + msg.response + "<br></li>");
 });
