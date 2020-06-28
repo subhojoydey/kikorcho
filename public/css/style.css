@@ -1,6 +1,5 @@
 header {
     background: linear-gradient(rgb(43, 99, 109), rgb(26, 161, 155));
-    border-radius: 25px;
     height: 55px;
     width: 98%;
     left: 1%;
@@ -25,6 +24,7 @@ header img {
 }
 
 body {
+    width: 700px;
     background-image: url('/../img/background.jpg');
     background-repeat: no-repeat;
     background-position: center;
@@ -73,34 +73,38 @@ body {
     margin-left: 2%;
 }
 
-#parentDisplay {
+#displayChat {
     color: #fff;
     padding: 10px 0 0 10px;
     height: calc(100vh - 138px);
     width: calc(100% - 20px);
     overflow-y: scroll;
-    margin: 10px 0 10px 10px;
+    margin: 25px 0 10px 10px;
     top: 50px;
     position: absolute;
+    line-height: 1;
 }
 
-#displayChat li {
-    background: linear-gradient(rgb(139, 84, 47), rgb(197, 149, 45));
+.displayyli {
+    margin: 10px auto 10px 10px;
+    text-align: left;
+    background: linear-gradient(rgb(88, 58, 38), rgb(100, 69, 2));
     border-radius: 10px;
     padding: 10px;
     color: #fff;
     border: 10px;
     border: 2px solid rgb(83, 107, 116);
     width: 40%;
+    list-style: none;
 }
 
-#ownChat li {
-    display: block;
-    margin: 0 auto;
+.ownli {
+    text-align: left;
     background: linear-gradient(rgb(43, 99, 109), rgb(26, 161, 155));
-    margin: 10px 10px 10px 10px;
+    margin: 10px 10px 10px auto;
     padding: 10px 10px;
     border-radius: 10px;
     color: #fff;
     width: 40%;
+    list-style: none;
 }
