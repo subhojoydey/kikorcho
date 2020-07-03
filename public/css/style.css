@@ -126,7 +126,7 @@ body {
     color: #fff;
     width: 40%;
     list-style: none;
-    overflow-x: hidden;
+    word-wrap: break-word;
 }
 
 p {
