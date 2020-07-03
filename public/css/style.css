@@ -24,11 +24,17 @@ header img {
 }
 
 body {
+    background-position: top 0;
     background-image: url('/../img/background.jpg');
     background-repeat: no-repeat;
     background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     font: 13px Helvetica, Arial;
-    height: 100%;
+    height: 100vh;
+    /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 #formChat {

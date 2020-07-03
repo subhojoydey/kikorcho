@@ -16,26 +16,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body id="contentBody">
+<body>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
+    <div class="page">
+        <header id="headerName">
+            <img src="img/logo.png" alt="Girl in a jacket">
+            <p id="typingPrompt"></p>
+        </header>
 
-    <header id="headerName">
-        <img src="img/logo.png" alt="Girl in a jacket">
-        <p id="typingPrompt"></p>
-    </header>
-
-    <div id="bot" action="POST">
-        <form id="formChat" method="POST" action="/">
-            <input id="userResponse" name="userText" type="text" autofocus/>
-            <button type="submit">Send</button>
-        </form>
+        <div id="bot" action="POST">
+            <form id="formChat" method="POST" action="/">
+                <input id="userResponse" name="userText" type="text" autofocus/>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <ul id="displayChat"> </ul>
     </div>
-    <ul id="displayChat"> </ul>
-
-
 </body>
 
 </html>
