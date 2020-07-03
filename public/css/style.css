@@ -24,13 +24,11 @@ header img {
 }
 
 body {
-    height: 200px;
-    width: 200px;
     background-image: url('/../img/background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     font: 13px Helvetica, Arial;
-    height: 100vh;
+    height: 100%;
 }
 
 #formChat {
@@ -76,7 +74,7 @@ body {
 #displayChat {
     color: #fff;
     padding: 10px 0 0 10px;
-    height: calc(100vh - 178px);
+    height: calc(100% - 178px);
     width: calc(100% - 20px);
     overflow-y: scroll;
     margin: 25px 0 10px 10px;
