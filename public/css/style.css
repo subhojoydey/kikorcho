@@ -1,5 +1,6 @@
 header {
     background: linear-gradient(rgb(43, 99, 109), rgb(26, 161, 155));
+    border-radius: 25px;
     height: 55px;
     width: 98%;
     left: 1%;
@@ -31,7 +32,7 @@ body {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    font: 13px Helvetica, Arial;
+    font: 13px;
     height: 100vh;
     /* Fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
@@ -86,7 +87,7 @@ body {
     margin: 25px 0 10px 10px;
     top: 50px;
     position: absolute;
-    line-height: 0.81;
+    overflow-x: hidden;
 }
 
 .displayli {
@@ -101,8 +102,10 @@ body {
 }
 
 p {
+    margin-bottom: 0rem !important;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     font-size: 1.2em;
+    overflow-x: hidden;
 }
 
 .ownli {

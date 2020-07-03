@@ -33,7 +33,6 @@ $(document).ready(function() {
             'usernames': userNames,
             'response': $('#userResponse').val()
         });
-        $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
         $("#userResponse").val("");
         timeoutFunction();
         return false;
@@ -82,6 +81,8 @@ socket.on('message', function(msg) {
             $('#displayChat').append("<li class='ownli'> <p style=' color:#" + randomColor + ";'>" + msg.usernames + ":</p>" + msg.response + "<br></li>");
         } else
             $('#displayChat').append("<li  class='displayli'> <p style='color:#" + randomColor + ";'>" + msg.usernames + "</p>" + msg.response + "<br></li>");
+
+        $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
     }
 });
 
