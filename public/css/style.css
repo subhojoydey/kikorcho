@@ -20,7 +20,7 @@ header img {
     height: 80%;
     padding-top: 5px;
     padding-left: 17px;
-    width: 4%;
+    width: 75px;
 }
 
 body {
@@ -55,8 +55,8 @@ body {
     color: white;
     padding-left: 30px;
     background: rgb(81, 83, 83);
-    padding: 10px;
-    width: 65%;
+    padding: 5px;
+    width: 75%;
     border-radius: 25px;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
@@ -66,10 +66,9 @@ body {
 }
 
 #formChat button {
-    width: 9%;
+    width: 80px;
     background: rgb(51, 243, 250);
     border-radius: 25px;
-    border: none;
     padding: 10px;
     margin-left: 2%;
 }
