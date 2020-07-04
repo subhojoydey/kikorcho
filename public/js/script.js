@@ -29,7 +29,6 @@ const usernameCatcher = () => {
     document.getElementById('full_name').focus();
     $("#nameForm").submit((e) => {
         e.preventDefault();
-        toggleFullScreen();
         let loaderPrompt = $('#full_name').val();
         if (loaderPrompt.trim() == "") {
             $('#nameAccept').modal({ dismissible: false }).modal('open');
