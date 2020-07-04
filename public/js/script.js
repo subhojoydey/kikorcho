@@ -12,6 +12,15 @@ let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
 
 
 //room banabo, user table maintain
@@ -25,6 +34,7 @@ var colors = ['#ff0000', '#00ff00', '#0000ff'];
 var random_color = colors[Math.floor(Math.random() * colors.length)];
 
 
+
 $(document).ready(function() {
     $("#formChat").submit((e) => {
         e.preventDefault();
@@ -33,6 +43,7 @@ $(document).ready(function() {
             'usernames': userNames,
             'response': $('#userResponse').val()
         });
+        //toggleFullScreen();
         $("#userResponse").val("");
         timeoutFunction();
         return false;
