@@ -5,27 +5,41 @@
 <head>
     <title>Document</title>
     <link href="css/style.css" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 </head>
 
 <body>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-
     <div class="page">
+        <div id="nameAccept" class="modal">
+            <form id="nameForm" action="" style="padding:40px;">
+                <h4>Your name</h4>
+                <i class="material-icons prefix">person_pin</i>
+                <input placeholder="Your name here" id="full_name" type="text" autofocus/>
+                <button class="btn waves-effect waves-light cyan" type="submit">Submit
+                <i class="material-icons right">send</i></button>
+            </form>
+        </div>
+
+
         <header id="headerName">
             <img src="img/logo.png" alt="Girl in a jacket">
             <p id="typingPrompt"></p>
         </header>
+
+        <div class="modal" id="online">
+            <div class="modal-content">
+                <h4>Online</h4>
+                <br>
+                <ul id="is_online"></ul>
+            </div>
+        </div>
+
 
         <div id="bot" action="POST">
             <form id="formChat" method="POST" action="/">
@@ -35,6 +49,13 @@
         </div>
         <ul id="displayChat"> </ul>
     </div>
+
+
+
+    <script src="//code.jquery.com/jquery-2.1.4.min.js "></script>
+    <script src="socket.io/socket.io.js "></script>
+    <script type="text/javascript " src="js/script.js "></script>
+    <script type="text/javascript " src="js/materialize.min.js "></script>
 </body>
 
 </html>

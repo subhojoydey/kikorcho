@@ -1,13 +1,29 @@
 //include libraries,packages
-var express = require('express');
-var app = express();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-var connectPORT = process.env.PORT || 3000;
-var nameEmitter = "";
+let express = require('express');
+let app = express();
+let http = require('http').createServer(app);
+let io = require('socket.io')(http);
+let connectPORT = process.env.PORT || 3000;
+let nameEmitter = "";
 let table = new Set();
-var val = "";
-var item;
+let val = "";
+let item;
+let onlineArray = null;
+let collection;
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://chat_admin:zaq12wsx@cluster0.tbivy.mongodb.net/<dbname>?retryWrites=true&w=majority";
+
+MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    if (err)
+        console.log('Error connecting')
+    else {
+        collection = client.db("master_chat").collection("online_members");
+    }
+});
+
 
 
 //loads the index.html on clients first request to root
@@ -20,7 +36,38 @@ app.use(express.static(__dirname + '/public'));
 
 
 
+const addMongo = async(myobj) => {
+    await collection.insertOne(myobj);
+    console.log("entry added")
+}
+
+const deleteMongo = async(myquery) => {
+    await collection.deleteOne(myquery);
+    console.log("entry deleted")
+}
+
+const mongoFinder = async() => {
+    onlineArray = await collection.find({}).toArray();
+    io.emit('is_online', onlineArray);
+    console.log(onlineArray);
+}
+
+
 io.on('connection', function(socket) {
+    socket.on('is_online', async(onlinePrompt) => {
+        socket.username = onlinePrompt;
+        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        let myobj = { _id: socket.id, name: onlinePrompt, color: randomColor };
+        await addMongo(myobj);
+        await mongoFinder();
+    })
+
+    socket.on('disconnect', async function(username) {
+        let myquery = { _id: socket.id };
+        await deleteMongo(myquery);
+        await mongoFinder();
+    })
+
     socket.on('typingFunction', function(typingFunction) {
         if (typingFunction.function != "remove") {
             table.add(typingFunction.usernames);
@@ -30,8 +77,13 @@ io.on('connection', function(socket) {
         io.emit('typingFunction', Array.from(table));
     });
 
-    socket.on('message', function(msg) {
-        io.emit('message', msg);
+    socket.on('message', async function(msg) {
+        var colorFinder = await collection.find({ _id: socket.id }).toArray();
+        io.emit('message', {
+            'usernames': msg.usernames,
+            'response': msg.response,
+            'color': colorFinder[0].color
+        });
     });
 });
 

@@ -25,17 +25,33 @@ function toggleFullScreen() {
 
 //room banabo, user table maintain
 const usernameCatcher = () => {
-    let loaderPrompt = prompt("Enter your name : ", "your name here");
-    userNames = loaderPrompt;
+    $('#nameAccept').modal({ dismissible: false }).modal('open');
+    document.getElementById('full_name').focus();
+    $("#nameForm").submit((e) => {
+        e.preventDefault();
+        let loaderPrompt = $('#full_name').val();
+        console.log(loaderPrompt);
+        userNames = loaderPrompt;
+        socket.emit('is_online', userNames);
+        //toggleFullScreen();
+        $('#nameAccept').modal('close');
+        document.getElementById('userResponse').focus();
+        return false;
+    });
 };
-
-document.onload = usernameCatcher();
-var colors = ['#ff0000', '#00ff00', '#0000ff'];
-var random_color = colors[Math.floor(Math.random() * colors.length)];
 
 
 
 $(document).ready(function() {
+    $('.modal').modal();
+    usernameCatcher();
+
+    $("#headerName").on("click", () => {
+        $('#online').modal('open');
+    });
+
+    document.getElementById("formChat").focus();
+
     $("#formChat").submit((e) => {
         e.preventDefault();
         let userResponse = $("#userResponse").val();
@@ -71,6 +87,13 @@ $(document).ready(function() {
     }
 });
 
+socket.on('is_online', (onlinePrompt) => {
+    $('#is_online').text("");
+    onlinePrompt.forEach(function(entry) {
+        $('#is_online').append("<li>" + entry.name + "</li><br>");
+    });
+});
+
 
 socket.on('typingFunction', function(typing) {
     if (typing.length == 0) {
@@ -87,11 +110,12 @@ socket.on('typingFunction', function(typing) {
 
 socket.on('message', function(msg) {
     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    console.log(socket.id);
     if (msg.response.trim() != "") {
         if (msg.usernames == userNames) {
-            $('#displayChat').append("<li class='ownli'> <p style=' color:#" + randomColor + ";'>" + msg.usernames + ":</p>" + msg.response + "<br></li>");
+            $('#displayChat').append("<li class='ownli'> <p style=' color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
         } else
-            $('#displayChat').append("<li  class='displayli'> <p style='color:#" + randomColor + ";'>" + msg.usernames + ":</p>" + msg.response + "<br></li>");
+            $('#displayChat').append("<li  class='displayli'> <p style='color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
 
         $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
     }
