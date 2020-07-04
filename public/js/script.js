@@ -29,11 +29,14 @@ const usernameCatcher = () => {
     document.getElementById('full_name').focus();
     $("#nameForm").submit((e) => {
         e.preventDefault();
+        toggleFullScreen();
         let loaderPrompt = $('#full_name').val();
-        console.log(loaderPrompt);
-        userNames = loaderPrompt;
-        socket.emit('is_online', userNames);
-        //toggleFullScreen();
+        if (loaderPrompt.trim() == "") {
+            $('#nameAccept').modal({ dismissible: false }).modal('open');
+        } else {
+            userNames = loaderPrompt;
+            socket.emit('is_online', userNames);
+        }
         $('#nameAccept').modal('close');
         document.getElementById('userResponse').focus();
         return false;
