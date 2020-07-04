@@ -2,6 +2,7 @@
 let express = require('express');
 let app = express();
 let http = require('http').createServer(app);
+require('dotenv').config();
 let io = require('socket.io')(http);
 let connectPORT = process.env.PORT || 3000;
 let nameEmitter = "";
@@ -11,12 +12,13 @@ let item;
 let onlineArray = null;
 let collection;
 
+//room
+//blank form at beginning block
+//
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://chat_admin:zaq12wsx@cluster0.tbivy.mongodb.net/<dbname>?retryWrites=true&w=majority";
-
-MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+MongoClient.connect(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
     if (err)
         console.log('Error connecting')
     else {
