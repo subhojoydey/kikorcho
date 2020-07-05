@@ -46,10 +46,8 @@ app.use(express.static(__dirname + '/public'));
 const addMongo = async(myobj, collectionChoice) => {
     if (collectionChoice == 1) {
         await collection1.insertOne(myobj);
-        console.log("entry added to 1st collection");
     } else if (collectionChoice == 2) {
         await collection2.insertOne(myobj);
-        console.log("entry added to 2nd collection");
     }
 }
 
@@ -57,39 +55,27 @@ const addMongo = async(myobj, collectionChoice) => {
 const deleteMongo = async(myquery, collectionChoice) => {
     if (collectionChoice == 1) {
         await collection1.deleteOne(myquery);
-        console.log("entry deleted from 1st collection");
     } else if (collectionChoice == 2) {
         await collection2.deleteOne(myquery);
-        console.log("entry deleted from 2nd collection");
     }
 }
 
 //finds in mongodb
 const nametableFinder = async(room_name) => {
     onlineArray = [];
-    console.log("Finding the entry in colection1");
     await roomnameFinder(room_name);
-    console.log(roomGetter);
     for (var i = 0; i < roomGetter.length; i++) {
-        console.log(roomGetter[i]._id);
-        console.log("entering to fetch names");
         temp = await collection1.find({ _id: roomGetter[i]._id }).toArray();
         onlineArray = onlineArray.concat(temp);
-        console.log("in loop");
-        console.log(onlineArray);
     }
-    console.log("outside loop");
-    console.log(onlineArray);
     io.in(room_name).emit('is_online', onlineArray);
 }
 
 const roomidFinder = async(room_id) => {
-    console.log("Finding the entry in colection2");
     roomGetter = await collection2.find({ _id: room_id }).toArray();
 }
 
 const roomnameFinder = async(room_name) => {
-    console.log("Finding the entry in colection2");
     roomGetter = await collection2.find({ name: room_name }).toArray();
 }
 
@@ -104,18 +90,14 @@ io.on('connection', function(socket) {
             let myobj = { _id: socket.id, name: roomDetails.name, password: roomDetails.password, purpose: roomDetails.purpose };
             await addMongo(myobj, 2);
             socket.join(roomDetails.name);
-            console.log("I am in room " + roomDetails.name)
         } else if (roomDetails.purpose == 1) {
             await roomnameFinder(roomDetails.name);
-            console.log("checking password");
             if (roomDetails.password == roomGetter[0].password) {
                 socket.emit('passcheck', 1);
                 let myobj = { _id: socket.id, name: roomDetails.name, password: roomDetails.password, purpose: roomDetails.purpose };
                 await addMongo(myobj, 2);
                 socket.join(roomDetails.name);
-                console.log("I am in room  " + roomDetails.name);
             } else {
-                console.log("worng pass");
                 await socket.emit('passcheck', 2);
             }
 
