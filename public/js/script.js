@@ -3,6 +3,7 @@ let typingTimer;
 let userNames;
 let typingnameSet = new Set();
 var typingName = "";
+let roomName, roomPassword, roomPurpose;
 
 
 
@@ -24,36 +25,81 @@ function toggleFullScreen() {
 
 
 //room banabo, user table maintain
+//room details logged
+const roomCatcher = () => {
+    $('#roomJoin').modal({ dismissible: false }).modal('open');
+    document.getElementById('room_name').focus();
+    $("#roomForm").submit((e) => {
+        e.preventDefault();
+        var roomPrompt = $('#room_name').val();
+        var roomPass = $('#room_pass').val();
+        var roomPur = $('#room_purpose').val();
+        if (roomPrompt.trim() != "" && roomPass.trim() != "") {
+            roomName = roomPrompt;
+            roomPassword = roomPass;
+            roomPurpose = roomPur;
+            if (roomPurpose == 2) {
+                socket.emit('roomjoin', { 'name': roomName, 'password': roomPassword, 'purpose': roomPurpose });
+                $('#roomJoin').modal('close');
+                $('#nameAccept').modal({ dismissible: false }).modal('open');
+                usernameCatcher();
+            } else if (roomPurpose == 1) {
+                socket.emit('roomjoin', { 'name': roomName, 'password': roomPassword, 'purpose': roomPurpose });
+                socket.on('passcheck', function(passFlag) {
+                    if (passFlag == 2) {
+                        alert('Please correct password for the room');
+                        return false;
+                    } else {
+                        console.log("reopen modal");
+                        $('#roomJoin').modal('close');
+                        $('#nameAccept').modal({ dismissible: false }).modal('open');
+                        usernameCatcher();
+                    }
+                })
+            }
+        } else {
+            alert('Please enter Room name and Password.');
+            return false;
+        }
+
+    });
+}
+
+//username details logged
 const usernameCatcher = () => {
-    $('#nameAccept').modal({ dismissible: false }).modal('open');
     document.getElementById('full_name').focus();
     $("#nameForm").submit((e) => {
         e.preventDefault();
-        let loaderPrompt = $('#full_name').val();
-        if (loaderPrompt.trim() == "") {
-            $('#nameAccept').modal({ dismissible: false }).modal('open');
+        var namePrompt = $('#full_name').val();
+        if (namePrompt.trim() == "") {
+            alert('Please enter Username');
+            return false;
         } else {
-            userNames = loaderPrompt;
+            userNames = namePrompt;
             socket.emit('is_online', userNames);
         }
         $('#nameAccept').modal('close');
         document.getElementById('userResponse').focus();
-        return false;
     });
 };
 
-
-
+//page loads
 $(document).ready(function() {
+    //initiators materialize
     $('.modal').modal();
-    usernameCatcher();
+    $('select').formSelect();
 
+    //functioncall for modals
+    roomCatcher();
+
+    //online pop up modal
     $("#headerName").on("click", () => {
         $('#online').modal('open');
     });
 
     document.getElementById("formChat").focus();
 
+    //user message logged
     $("#formChat").submit((e) => {
         e.preventDefault();
         let userResponse = $("#userResponse").val();
@@ -67,18 +113,17 @@ $(document).ready(function() {
         return false;
     });
 
+    //typing prompt
     $("#userResponse").keypress(() => {
         socket.emit('typingFunction', {
             'usernames': userNames,
             'function': ' is typing...   '
         });
     });
-
     $("#userResponse").keyup(() => {
         clearTimeout(typingTimer);
         timeoutFunction();
     });
-
     const timeoutFunction = () => {
         typingTimer = setTimeout(() => {
             socket.emit('typingFunction', {
@@ -89,6 +134,7 @@ $(document).ready(function() {
     }
 });
 
+//from server online pop up
 socket.on('is_online', (onlinePrompt) => {
     $('#is_online').text("");
     onlinePrompt.forEach(function(entry) {
@@ -96,7 +142,7 @@ socket.on('is_online', (onlinePrompt) => {
     });
 });
 
-
+//from server typing pop up
 socket.on('typingFunction', function(typing) {
     if (typing.length == 0) {
         $('#typingPrompt').text("");
@@ -109,10 +155,8 @@ socket.on('typingFunction', function(typing) {
     }
 });
 
-
+//from server user message
 socket.on('message', function(msg) {
-    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    console.log(socket.id);
     if (msg.response.trim() != "") {
         if (msg.usernames == userNames) {
             $('#displayChat').append("<li class='ownli'> <p style=' color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");

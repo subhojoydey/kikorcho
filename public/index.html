@@ -16,6 +16,26 @@
 
 <body>
     <div class="page">
+
+        <div id="roomJoin" class="modal">
+            <form id="roomForm" action="" style="padding:40px;">
+                <h4>Join A Room</h4>
+                <i class="material-icons prefix">home</i>
+                <input placeholder="Your Room Name" id="room_name" type="text" autofocus/>
+                <input placeholder="Your Room Password" id="room_pass" type="password" autofocus/>
+                <div class="input-field col s12">
+                    <select id="room_purpose">
+                    <option value="" disabled selected>Room Option</option>
+                    <option value="1">Join Room</option>
+                    <option value="2">Create Room</option>
+                    <label>Materialize Select</label>
+                    </select>
+                </div>
+                <button class="btn waves-effect waves-light cyan" type="submit">Enter
+                <i class="material-icons right">send</i></button>
+            </form>
+        </div>
+
         <div id="nameAccept" class="modal">
             <form id="nameForm" action="" style="padding:40px;">
                 <h4>Your name</h4>
