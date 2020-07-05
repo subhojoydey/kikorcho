@@ -9,7 +9,7 @@ let nameEmitter = "";
 let table = new Set();
 let val = "";
 let item;
-let onlineArray = null;
+let onlineArray = [];
 let collection1, collection2;
 let roomGetter;
 
@@ -63,10 +63,21 @@ const deleteMongo = async(myquery, collectionChoice) => {
 
 //finds in mongodb
 const nametableFinder = async(room_name) => {
+    onlineArray = [];
     console.log("Finding the entry in colection1");
-    onlineArray = await collection1.find({}).toArray();
-    io.in(room_name).emit('is_online', onlineArray);
+    await roomnameFinder(room_name);
+    console.log(roomGetter);
+    for (var i = 0; i < roomGetter.length; i++) {
+        console.log(roomGetter[i]._id);
+        console.log("entering to fetch names");
+        temp = await collection1.find({ _id: roomGetter[i]._id }).toArray();
+        onlineArray = onlineArray.concat(temp);
+        console.log("in loop");
+        console.log(onlineArray);
+    }
+    console.log("outside loop");
     console.log(onlineArray);
+    io.in(room_name).emit('is_online', onlineArray);
 }
 
 const roomidFinder = async(room_id) => {
