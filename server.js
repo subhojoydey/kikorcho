@@ -4,6 +4,8 @@ let app = express();
 let http = require('http').createServer(app);
 require('dotenv').config();
 let io = require('socket.io')(http);
+io.eio.pingTimeout = 300000; // 2 minutes
+io.eio.pingInterval = 5000; // 5 seconds
 let connectPORT = process.env.PORT || 3000;
 let nameEmitter = "";
 let table = new Set();
@@ -12,6 +14,7 @@ let item;
 let onlineArray = [];
 let collection1, collection2;
 let roomGetter;
+
 
 //room
 //blank form at beginning block
@@ -92,6 +95,8 @@ const roomnameFinder = async(room_name) => {
 
 //start connection
 io.on('connection', function(socket) {
+    io.eio.pingTimeout = 300000; // 2 minutes
+    io.eio.pingInterval = 5000; // 5 seconds
 
     //join or create room
     socket.on('roomjoin', async(roomDetails) => {
