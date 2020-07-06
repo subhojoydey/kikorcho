@@ -1,14 +1,11 @@
 header {
     text-align: left;
     background: linear-gradient(rgb(43, 99, 109), rgb(26, 161, 155));
-    border-radius: 25px;
     height: 55px;
-    width: 98%;
-    left: 1%;
+    width: 100%;
     border: 2px solid #062033;
     color: #fff;
     position: absolute;
-    top: 1%;
 }
 
 header p {
@@ -35,11 +32,7 @@ header img {
 body {
     background-position: top 0;
     background-image: url('/../img/background.jpg');
-    background-repeat: no-repeat;
     background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     font: 13px;
     height: 100vh;
     /* Fallback for browsers that do not support Custom Properties */
@@ -57,7 +50,7 @@ body {
     border-top-style: solid;
     border-top-width: 7px;
     border-bottom-style: solid;
-    border-bottom-width: 7px;
+    border-bottom-width: 1px;
     overflow: auto;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
