@@ -57,7 +57,6 @@ const roomCatcher = () => {
                         alert('Please correct password for the room');
                         return false;
                     } else if (passFlag == 1) {
-                        console.log("reopen modal");
                         $('#roomJoin').modal('close');
                         $('#nameAccept').modal({ dismissible: false }).modal('open');
                         usernameCatcher();
@@ -160,7 +159,7 @@ socket.on('typingFunction', function(typing) {
         $('#typingPrompt').text("");
     } else if (typing.length != 0) {
         typing.forEach(function(entry) {
-            typingName = typingName.concat(", " + entry);
+            typingName = typingName.concat(entry + ", ");
         });
         $('#typingPrompt').text(typingName + " is typing .... ");
         typingName = "";
