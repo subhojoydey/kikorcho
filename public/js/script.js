@@ -126,7 +126,7 @@ $(document).ready(function() {
     });
 
     //typing prompt
-    $("#userResponse").keypress(() => {
+    $("#userResponse").on('input', () => {
         socket.emit('typingFunction', {
             'usernames': userNames,
             'function': ' is typing...   '
