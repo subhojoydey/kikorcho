@@ -30,6 +30,13 @@ function toggleFullScreen() {
 const roomCatcher = () => {
     $('#roomJoin').modal({ dismissible: false }).modal('open');
     document.getElementById('room_name').focus();
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+        console.log(response.toArray());
+    });
+
+
     $("#roomForm").submit((e) => {
         e.preventDefault();
         var roomPrompt = $('#room_name').val();
@@ -173,8 +180,9 @@ socket.on('message', function(msg) {
         if (msg.usernames == userNames) {
             $('#displayChat').append("<li class='ownli'> <p style=' color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
         } else {
-            audio.play();
             $('#displayChat').append("<li  class='displayli'> <p style='color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
+            audio.play();
+            audio.pause();
         }
         $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
     }
