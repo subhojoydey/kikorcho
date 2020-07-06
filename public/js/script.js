@@ -35,7 +35,7 @@ const roomCatcher = () => {
 
     window.fbAsyncInit = function() {
         FB.init({
-            appId: 'BinarY',
+            appId: 'kikorcho',
             cookie: true,
             xfbml: true,
             version: 'v7.0'
