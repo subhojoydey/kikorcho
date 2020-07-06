@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <title>Document</title>
     <link href="css/style.css" rel="stylesheet">
@@ -36,10 +37,10 @@
 
         window.fbAsyncInit = function() {
             FB.init({
-                appId: '{app-id}',
+                appId: 'kikorcho',
                 cookie: true, // Enable cookies to allow the server to access the session.
                 xfbml: true, // Parse social plugins on this webpage.
-                version: '{api-version}' // Use this Graph API version for this call.
+                version: 'v7.0' // Use this Graph API version for this call.
             });
 
 
@@ -57,6 +58,7 @@
             });
         }
     </script>
+
 
 
     <div class="page">
@@ -89,46 +91,53 @@
                             <div class="form-field" style="padding:30px 0 30px 0">
                                 <button class="btn-large waves-effect waves-dark" style="width:100%;" type="submit">Enter</button>
                             </div>
+
+                            <div class="form-field" style="padding:30px 0 30px 0">
+                                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                </fb:login-button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div id="nameAccept " class="modal ">
-            <form id="nameForm " action=" " style="padding:40px; ">
+        <div id="nameAccept" class="modal">
+            <form id="nameForm" action="" style="padding:40px;">
                 <h4>Your name</h4>
-                <i class="material-icons prefix ">person_pin</i>
-                <input placeholder="Your name here " id="full_name " type="text " autofocus/>
-                <fb:login-button show-faces="true" width="200" max-rows="1" background="dark" length="long" scope=" public_profile,email " onlogin="checkLoginState(); "> Connect with Fb
+                <i class="material-icons prefix">person_pin</i>
+                <input placeholder="Your name here" id="full_name" type="text" autofocus/>
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
                 </fb:login-button>
-                <button class="btn waves-effect waves-light cyan " type="submit ">Submit
-                <i class="material-icons right ">send</i></button>
+                <div id="status">
+                </div>
+                <button class="btn waves-effect waves-light cyan" type="submit">Submit
+                <i class="material-icons right">send</i></button>
             </form>
         </div>
 
 
-        <header id="headerName ">
-            <img src="img/logo.png " alt="Girl in a jacket ">
-            <p id="typingPrompt "></p>
+        <header id="headerName">
+            <img src="img/logo.png" alt="Girl in a jacket">
+            <p id="typingPrompt"></p>
         </header>
 
-        <div class="modal " id="online ">
-            <div class="modal-content ">
+        <div class="modal" id="online">
+            <div class="modal-content">
                 <h4>Online</h4>
                 <br>
-                <ul id="is_online "></ul>
+                <ul id="is_online"></ul>
             </div>
         </div>
 
 
-        <div id="bot " action="POST ">
-            <form id="formChat " method="POST " action="/ ">
-                <input id="userResponse " name="userText " type="text " autofocus/>
-                <button type="submit ">Send</button>
+        <div id="bot" action="POST">
+            <form id="formChat" method="POST" action="/">
+                <input id="userResponse" name="userText" type="text" autofocus/>
+                <button type="submit">Send</button>
             </form>
         </div>
-        <ul id="displayChat "> </ul>
+        <ul id="displayChat"> </ul>
     </div>
 
 
