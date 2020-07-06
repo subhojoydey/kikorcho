@@ -155,12 +155,12 @@ socket.on('is_online', (onlinePrompt) => {
 //from server typing pop up
 socket.on('typingFunction', function(typing) {
     if (typing.length == 0) {
-        $('#typingPrompt').val("");
+        $('#typingPrompt').text("");
     } else if (typing.length != 0) {
         typing.forEach(function(entry) {
             typingName = typingName.concat(", " + entry);
         });
-        $('#typingPrompt').val(typingName + " is typing .... ");
+        $('#typingPrompt').text(typingName + " is typing .... ");
         typingName = "";
     }
 });
