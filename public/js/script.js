@@ -40,9 +40,16 @@ const roomCatcher = () => {
             roomPurpose = roomPur;
             if (roomPurpose == 2) {
                 socket.emit('roomjoin', { 'name': roomName, 'password': roomPassword, 'purpose': roomPurpose });
-                $('#roomJoin').modal('close');
-                $('#nameAccept').modal({ dismissible: false }).modal('open');
-                usernameCatcher();
+                socket.on('nameChecker', function(nameFlag) {
+                    if (nameFlag == 1) {
+                        alert('Room exists, enter another room name');
+                        return false;
+                    } else if (nameFlag == 2) {
+                        $('#roomJoin').modal('close');
+                        $('#nameAccept').modal({ dismissible: false }).modal('open');
+                        usernameCatcher();
+                    }
+                })
             } else if (roomPurpose == 1) {
                 socket.emit('roomjoin', { 'name': roomName, 'password': roomPassword, 'purpose': roomPurpose });
                 socket.on('passcheck', function(passFlag) {

@@ -9,30 +9,44 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
 
 <body>
     <div class="page">
-        <div class="container">
-            <div id="roomJoin" class="modal center-align">
-                <form id="roomForm" action="" class="col s12 m4 offset-m4" style="padding:30px; padding-bottom: 10px;">
-                    <h4>Join A Room</h4>
-                    <i class="material-icons prefix">home</i>
-                    <input placeholder="Your Room Name" id="room_name" type="text" autofocus/>
-                    <input placeholder="Your Room Password" id="room_pass" type="password" autofocus/>
-                    <div class="input-field col s12 s16">
-                        <select id="room_purpose">
-                    <option value="" disabled selected>Room Option</option>
-                    <option value="1">Join Room</option>
-                    <option value="2">Create Room</option>
-                    <label>Materialize Select</label>
-                    </select>
+        <div id="roomJoin" class="modal">
+            <div class="col s12 m4 offset-m4">
+                <form id="roomForm" action="">
+                    <div class="cards">
+                        <div class="card-action teal lighten-1 white-text" style="padding:10px 0 10px 40px">
+                            <h4>Join A Room</h4>
+                        </div>
+
+                        <div class="card-content" style="padding:20px 40px 0 40px">
+                            <div class="form-field">
+                                <input placeholder="Your Room Name" id="room_name" type="text" autofocus/>
+                            </div><br>
+
+                            <div class="form-field">
+                                <label for="room_name">Room Password</label>
+                                <input placeholder="Your Room Password" id="room_pass" type="password" autofocus/>
+                            </div><br>
+
+                            <div class="form_field">
+                                <select id="room_purpose">
+                                    <option value="" disabled selected>Room Option</option>
+                                    <option value="1">Join Room</option>
+                                    <option value="2">Create Room</option>
+                                    <label>Materialize Select</label>
+                                </select>
+                            </div>
+
+                            <div class="form-field" style="padding:30px 0 30px 0">
+                                <button class="btn-large waves-effect waves-dark" style="width:100%;" type="submit">Enter</button>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn waves-effect waves-light cyan" type="submit">Enter
-                <i class="material-icons right">send</i></button>
                 </form>
             </div>
         </div>
@@ -77,6 +91,8 @@
     <script src="socket.io/socket.io.js "></script>
     <script type="text/javascript " src="js/script.js "></script>
     <script type="text/javascript " src="js/materialize.min.js "></script>
+    <script type="text/javascript " src="js/select.js "></script>
+
 </body>
 
 </html>
