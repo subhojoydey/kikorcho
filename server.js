@@ -4,7 +4,7 @@ let app = express();
 let http = require('http').createServer(app);
 require('dotenv').config();
 let io = require('socket.io')(http, {
-    pingTimeout: 30000, // 5 minutes
+    pingTimeout: 300000, // 5 minutes
     pingInterval: 5000 // 5 seconds
 });
 let connectPORT = process.env.PORT || 3000;
@@ -157,7 +157,7 @@ io.on('connection', function(socket) {
             'response': msg.response,
             'color': colorFinder[0].color
         });
-        socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 30000);
+        socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 300000);
     });
 });
 
