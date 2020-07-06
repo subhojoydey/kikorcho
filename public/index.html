@@ -16,8 +16,22 @@
 <body>
     <div class="page">
         <div id="roomJoin" class="modal">
-
             <form id="roomForm" action="">
+                <h4>Join A Room</h4>
+                <input placeholder="Your Room Name" id="room_name" type="text" autofocus/>
+
+
+                <input placeholder="Your Room Password" id="room_pass" type="password" autofocus/>
+
+
+                <select id="room_purpose">
+                                    <option value="" disabled selected>Room Option</option>
+                                    <option value="1">Join Room</option>
+                                    <option value="2">Create Room</option>
+                                    <label>Materialize Select</label>
+                                </select>
+
+                <button class="btn-large waves-effect waves-dark" style="width:100%;" type="submit">Enter</button>
                 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
                 </fb:login-button>
             </form>
