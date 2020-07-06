@@ -16,8 +16,12 @@
 <body>
     <div class="page">
         <div id="roomJoin" class="modal">
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-            </fb:login-button>
+
+            <form id="roomForm" action="">
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                </fb:login-button>
+            </form>
+
         </div>
 
         <div id="nameAccept" class="modal">
