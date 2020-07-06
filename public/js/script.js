@@ -4,6 +4,7 @@ let userNames;
 let typingnameSet = new Set();
 var typingName = "";
 let roomName, roomPassword, roomPurpose;
+var audio = new Audio('/..//music/ding.mp3');
 
 
 
@@ -171,9 +172,10 @@ socket.on('message', function(msg) {
     if (msg.response.trim() != "") {
         if (msg.usernames == userNames) {
             $('#displayChat').append("<li class='ownli'> <p style=' color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
-        } else
+        } else {
+            audio.play();
             $('#displayChat').append("<li  class='displayli'> <p style='color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
-
+        }
         $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
     }
 });
