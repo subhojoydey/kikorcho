@@ -102,15 +102,17 @@ io.on('connection', function(socket) {
             }
         } else if (roomDetails.purpose == 1) {
             await roomnameFinder(roomDetails.name);
-            if (roomDetails.password == roomGetter[0].password) {
-                socket.emit('passcheck', 1);
-                let myobj = { _id: socket.id, name: roomDetails.name, password: roomDetails.password, purpose: roomDetails.purpose };
-                await addMongo(myobj, 2);
-                socket.join(roomDetails.name);
-            } else {
-                await socket.emit('passcheck', 2);
-            }
-
+            if (roomGetter.length != 0) {
+                if (roomDetails.password == roomGetter[0].password) {
+                    socket.emit('passcheck', 1);
+                    let myobj = { _id: socket.id, name: roomDetails.name, password: roomDetails.password, purpose: roomDetails.purpose };
+                    await addMongo(myobj, 2);
+                    socket.join(roomDetails.name);
+                } else {
+                    await socket.emit('passcheck', 2);
+                }
+            } else
+                await socket.emit('passcheck', 3);
         }
     })
 

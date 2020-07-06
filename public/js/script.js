@@ -56,11 +56,14 @@ const roomCatcher = () => {
                     if (passFlag == 2) {
                         alert('Please correct password for the room');
                         return false;
-                    } else {
+                    } else if (passFlag == 1) {
                         console.log("reopen modal");
                         $('#roomJoin').modal('close');
                         $('#nameAccept').modal({ dismissible: false }).modal('open');
                         usernameCatcher();
+                    } else if (passFlag == 3) {
+                        alert('Room doesn\'t exist');
+                        return false;
                     }
                 })
             }
@@ -152,12 +155,12 @@ socket.on('is_online', (onlinePrompt) => {
 //from server typing pop up
 socket.on('typingFunction', function(typing) {
     if (typing.length == 0) {
-        $('#typingPrompt').text("");
+        $('#typingPrompt').val("");
     } else if (typing.length != 0) {
         typing.forEach(function(entry) {
-            typingName = typingName.concat(" " + entry);
+            typingName = typingName.concat(", " + entry);
         });
-        $('#typingPrompt').text(typingName + " is typing .... ");
+        $('#typingPrompt').val(typingName + " is typing .... ");
         typingName = "";
     }
 });
