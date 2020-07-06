@@ -120,7 +120,7 @@ body {
 }
 
 .displayli {
-    margin: 10px auto -4px 10px;
+    margin: 1px auto -4px 10px;
     text-align: left;
     background: linear-gradient(rgb(114, 74, 23), rgb(214, 161, 61));
     border-radius: 10px;
