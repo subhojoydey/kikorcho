@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <title>Document</title>
     <link href="css/style.css" rel="stylesheet">
@@ -14,6 +13,43 @@
 </head>
 
 <body>
+
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: 'kikorcho',
+                cookie: true,
+                xfbml: true,
+                version: 'v7.0'
+            });
+
+
+            FB.getLoginStatus(function(response) {
+                console.log(response);
+            });
+
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
+
+
     <div class="page">
         <div id="roomJoin" class="modal">
             <div class="col s12 m4 offset-m4">
@@ -96,13 +132,6 @@
     <script type="text/javascript " src="js/script.js "></script>
     <script type="text/javascript " src="js/materialize.min.js "></script>
     <script type="text/javascript " src="js/select.js "></script>
-    <script>
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
-        }
-    </script>
 
 
 </body>
