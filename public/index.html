@@ -29,7 +29,6 @@
                             </div><br>
 
                             <div class="form-field">
-                                <label for="room_name">Room Password</label>
                                 <input placeholder="Your Room Password" id="room_pass" type="password" autofocus/>
                             </div><br>
 
@@ -44,6 +43,11 @@
 
                             <div class="form-field" style="padding:30px 0 30px 0">
                                 <button class="btn-large waves-effect waves-dark" style="width:100%;" type="submit">Enter</button>
+                            </div>
+
+                            <div class="form-field" style="padding:30px 0 30px 0">
+                                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                </fb:login-button>
                             </div>
                         </div>
                     </div>
@@ -92,6 +96,13 @@
     <script type="text/javascript " src="js/script.js "></script>
     <script type="text/javascript " src="js/materialize.min.js "></script>
     <script type="text/javascript " src="js/select.js "></script>
+    <script>
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
 
 
 </body>
