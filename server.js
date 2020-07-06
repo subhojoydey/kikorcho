@@ -3,9 +3,10 @@ let express = require('express');
 let app = express();
 let http = require('http').createServer(app);
 require('dotenv').config();
-let io = require('socket.io')(http);
-io.eio.pingTimeout = 300000; // 2 minutes
-io.eio.pingInterval = 5000; // 5 seconds
+let io = require('socket.io')(http, {
+    pingTimeout: 30000, // 5 minutes
+    pingInterval: 5000 // 5 seconds
+});
 let connectPORT = process.env.PORT || 3000;
 let nameEmitter = "";
 let table = new Set();
@@ -148,6 +149,7 @@ io.on('connection', function(socket) {
 
     //send message
     socket.on('message', async function(msg) {
+        clearTimeout(socket.inactivityTimeout);
         var colorFinder = await collection1.find({ _id: socket.id }).toArray();
         await roomidFinder(socket.id);
         io.in(roomGetter[0].name).emit('message', {
@@ -155,6 +157,7 @@ io.on('connection', function(socket) {
             'response': msg.response,
             'color': colorFinder[0].color
         });
+        socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 30000);
     });
 });
 

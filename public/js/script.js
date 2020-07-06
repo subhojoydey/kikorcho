@@ -88,6 +88,9 @@ const usernameCatcher = () => {
             userNames = namePrompt;
             socket.emit('is_online', userNames);
         }
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            toggleFullScreen();
+        }
         $('#nameAccept').modal('close');
         document.getElementById('userResponse').focus();
     });
@@ -117,7 +120,6 @@ $(document).ready(function() {
             'usernames': userNames,
             'response': $('#userResponse').val()
         });
-        //toggleFullScreen();
         $("#userResponse").val("");
         timeoutFunction();
         return false;
