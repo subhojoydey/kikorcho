@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
@@ -107,8 +108,8 @@
                 <h4>Your name</h4>
                 <i class="material-icons prefix">person_pin</i>
                 <input placeholder="Your name here" id="full_name" type="text" autofocus/>
-                <button><fb:login-button scope="public_profile,email" onlogin="checkLoginState();">FB LOGIN
-                </fb:login-button></button>
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">FB LOGIN
+                </fb:login-button>
                 <div id="status">
                 </div>
                 <button class="btn waves-effect waves-light cyan" type="submit">Submit
@@ -146,6 +147,7 @@
     <script src="socket.io/socket.io.js "></script>
     <script type="text/javascript " src="js/script.js "></script>
     <script type="text/javascript " src="js/materialize.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript " src="js/select.js "></script>
 
 
