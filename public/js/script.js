@@ -94,6 +94,7 @@ const usernameCatcher = () => {
         loginWithFacebook();
         socket.on('token', (tokenverify) => {
             if (tokenverify.verify == 1) {
+                console.log(tokenverify.name + " " + tokenverify.verify);
                 userNames = tokenverify.name;
                 socket.emit('is_online', userNames);
                 $('#nameForm').submit();
