@@ -89,13 +89,14 @@ const roomCatcher = () => {
 const usernameCatcher = () => {
     document.getElementById('full_name').focus();
 
-    $("#clicker").click(function() {
+    $("#nameFb").click(function() {
         loginWithFacebook();
         socket.on('token', (verify) => {
             if (verify == 1) {
                 userNames = verfify.name;
                 socket.emit('is_online', userNames);
                 $('#nameAccept').modal('close');
+                document.getElementById('userResponse').focus();
             } else {
                 alert('BAD FACEBOOK');
                 return false;
@@ -104,7 +105,7 @@ const usernameCatcher = () => {
         })
     });
 
-    $("#nameForm").submit((e) => {
+    $("#nameManual").click((e) => {
         e.preventDefault();
         var namePrompt = $('#full_name').val();
         if (namePrompt.trim() == "") {
