@@ -96,7 +96,6 @@ const usernameCatcher = () => {
             if (verify == 1) {
                 userNames = verfify.name;
                 socket.emit('is_online', userNames);
-                $('#nameForm').submit();
                 $('#nameAccept').modal('close');
                 document.getElementById('userResponse').focus();
             } else {

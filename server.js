@@ -8,13 +8,14 @@ let io = require('socket.io')(http, {
     pingInterval: 5000 // 5 seconds
 });
 let connectPORT = process.env.PORT || 3000;
-let nameEmitter = "";
 let table = new Set();
 let val = "";
 let item;
 let onlineArray = [];
 let collection1, collection2;
 let roomGetter;
+const fetch = require('node-fetch');
+
 
 
 //room
