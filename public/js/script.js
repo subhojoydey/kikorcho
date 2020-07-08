@@ -4,7 +4,6 @@ let userNames;
 let typingnameSet = new Set();
 var typingName = "";
 let roomName, roomPassword, roomPurpose;
-var audio = new Audio('/..//music/ding.mp3');
 let authResponse;
 
 
@@ -200,6 +199,7 @@ socket.on('typingFunction', function(typing) {
 //from server user message
 socket.on('message', function(msg) {
     if (msg.response.trim() != "") {
+        var audio = new Audio('/..//music/ding.mp3');
         if (msg.usernames == userNames) {
             $('#displayChat').append("<li class='ownli'> <p style=' color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
         } else {
