@@ -92,10 +92,11 @@ const usernameCatcher = () => {
     $("#nameFb").click(function(e) {
         e.preventDefault();
         loginWithFacebook();
-        socket.on('token', (verify) => {
-            if (verify == 1) {
-                userNames = verfify.name;
+        socket.on('token', (tokenverify) => {
+            if (tokenverify.verify == 1) {
+                userNames = tokenverify.name;
                 socket.emit('is_online', userNames);
+                $('#nameForm').submit();
                 $('#nameAccept').modal('close');
                 document.getElementById('userResponse').focus();
             } else {
