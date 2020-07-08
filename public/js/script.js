@@ -89,7 +89,8 @@ const roomCatcher = () => {
 const usernameCatcher = () => {
     document.getElementById('full_name').focus();
 
-    $("#nameFb").click(function() {
+    $("#nameFb").click(function(e) {
+        e.preventDefault();
         loginWithFacebook();
         socket.on('token', (verify) => {
             if (verify == 1) {
