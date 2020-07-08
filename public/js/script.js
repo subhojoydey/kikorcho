@@ -92,7 +92,7 @@ const usernameCatcher = () => {
     $("#nameFb").click(function(e) {
         e.preventDefault();
         loginWithFacebook();
-        socket.on('token', (tokenverify) => {
+        socket.on('tokenverify', (tokenverify) => {
             if (tokenverify.verify == 1) {
                 console.log(tokenverify.name + " " + tokenverify.verify);
                 userNames = tokenverify.name;
