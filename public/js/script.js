@@ -97,7 +97,7 @@ const usernameCatcher = () => {
                 console.log(tokenverify.name + " " + tokenverify.verify);
                 userNames = tokenverify.name;
                 socket.emit('is_online', userNames);
-                $('#nameForm').submit();
+                $('#nameForm').submit(false);
                 $('#nameAccept').modal('close');
                 document.getElementById('userResponse').focus();
             } else {
