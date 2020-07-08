@@ -117,6 +117,22 @@ io.on('connection', function(socket) {
         }
     })
 
+
+    socket.on('token', async(authResponse) => {
+        console.log(authResponse.userID);
+        console.log(authResponse.accessToken);
+        var res = await fetch(`https://graph.facebook.com/v7.0/me?access_token=${authResponse.accessToken}`);
+        var res1 = await res.json();
+        console.log("these are details");
+        console.log(res1.id);
+        console.log(res1.name);
+        if (authResponse.userID == res1.id) {
+            socket.emit('tokenverify', { "verify": 1, "name": res1.name });
+        } else {
+            socket.emit('tokenverify', { "verify": 2 });
+        }
+    });
+
     //send online pop up
     socket.on('is_online', async(onlinePrompt) => {
         var randomColor = Math.floor(Math.random() * 16777215).toString(16);

@@ -15,53 +15,6 @@
 </head>
 
 <body>
-
-    <script>
-        function statusChangeCallback(response) { // Called with the results from FB.getLoginStatus().
-            console.log('statusChangeCallback');
-            console.log(response); // The current login status of the person.
-            if (response.status === 'connected') { // Logged into your webpage and Facebook.
-                testAPI();
-            } else { // Not logged into your webpage or we are unable to tell.
-                document.getElementById('status').innerHTML = 'Please log ' +
-                    'into this webpage.';
-            }
-        }
-
-
-        function checkLoginState() { // Called when a person is finished with the Login Button.
-            FB.getLoginStatus(function(response) { // See the onlogin handler
-                statusChangeCallback(response);
-            });
-        }
-
-
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: 'kikorcho',
-                cookie: true, // Enable cookies to allow the server to access the session.
-                xfbml: true, // Parse social plugins on this webpage.
-                version: 'v7.0' // Use this Graph API version for this call.
-            });
-
-
-            FB.getLoginStatus(function(response) { // Called after the JS SDK has been initialized.
-                statusChangeCallback(response); // Returns the login status.
-            });
-        };
-
-        function testAPI() { // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-                console.log('Successful login for: ' + response.name);
-                document.getElementById('status').innerHTML =
-                    'Thanks for logging in, ' + response.name + '!';
-            });
-        }
-    </script>
-
-
-
     <div class="page">
         <div id="roomJoin" class="modal">
             <div class="col s12 m4 offset-m4">
@@ -93,10 +46,6 @@
                                 <button class="btn-large waves-effect waves-dark" style="width:100%;" type="submit">Enter</button>
                             </div>
 
-                            <div class="form-field" style="padding:30px 0 30px 0">
-                                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                                </fb:login-button>
-                            </div>
                         </div>
                     </div>
                 </form>
@@ -108,8 +57,11 @@
                 <h4>Your name</h4>
                 <i class="material-icons prefix">person_pin</i>
                 <input placeholder="Your name here" id="full_name" type="text" autofocus/>
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">FB LOGIN
-                </fb:login-button>
+
+                <div class="form-field center-align" style="padding:30px 0 30px 0">
+                    <button class="blue" id="clicker">Login with FB</button>
+                </div>
+
                 <div id="status">
                 </div>
                 <button class="btn waves-effect waves-light cyan" type="submit">Submit
@@ -149,6 +101,29 @@
     <script type="text/javascript " src="js/materialize.min.js "></script>
     <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script-->
     <script type="text/javascript " src="js/select.js "></script>
+
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '368816737430257',
+                cookie: true,
+                xfbml: true,
+                version: 'v7.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
 
 </body>

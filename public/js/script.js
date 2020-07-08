@@ -5,6 +5,7 @@ let typingnameSet = new Set();
 var typingName = "";
 let roomName, roomPassword, roomPurpose;
 var audio = new Audio('/..//music/ding.mp3');
+let authResponse;
 
 
 
@@ -24,6 +25,14 @@ function toggleFullScreen() {
     }
 }
 
+
+function loginWithFacebook() {
+    FB.login(response => {
+        authResponse = response.authResponse;
+        socket.emit('token', authResponse);
+        console.log(response.authResponse);
+    }, { scope: 'public_profile,email' })
+}
 
 //room banabo, user table maintain
 //room details logged
@@ -79,6 +88,22 @@ const roomCatcher = () => {
 //username details logged
 const usernameCatcher = () => {
     document.getElementById('full_name').focus();
+
+    $("#clicker").click(function() {
+        loginWithFacebook();
+        socket.on('token', (verify) => {
+            if (verify == 1) {
+                userNames = verfify.name;
+                socket.emit('is_online', userNames);
+                $('#nameAccept').modal('close');
+            } else {
+                alert('BAD FACEBOOK');
+                return false;
+            }
+
+        })
+    });
+
     $("#nameForm").submit((e) => {
         e.preventDefault();
         var namePrompt = $('#full_name').val();
