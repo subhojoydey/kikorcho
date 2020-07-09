@@ -54,12 +54,20 @@
 
         <div id="nameAccept" class="modal">
             <form id="nameForm" action="" style="padding:40px;">
-                <h4>Your name</h4>
                 <i class="material-icons prefix">person_pin</i>
-                <input placeholder="Your name here" id="full_name" type="text" autofocus/>
-                <button id="nameFb" class="blue btn waves-effect" type="submit">Login with FB</button>
-                <button id="nameManual" class="btn waves-effect waves-light cyan" type="submit">Submit
-                <i class="material-icons right">send</i></button>
+                <h4>Your name</h4>
+                <div class="row">
+                    <div class="col s12 m4 l8">
+                        <p><input placeholder="Your name here" id="full_name" type="text" autofocus/></p>
+                    </div>
+                    <div class="col s12 m4 l2">
+                        <p><button id="nameManual" class="btn waves-effect waves-light cyan" type="submit">Submit<i class="material-icons right">send</i></button></p>
+                    </div>
+                    <div class="col s12">
+                        <p><button id="nameFb" class="blue btn waves-effect" type="submit" style="margin:20px 0px;">Login with FB</button></p>
+                    </div>
+                </div>
+            </form>
             </form>
         </div>
 

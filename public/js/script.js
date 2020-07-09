@@ -205,7 +205,6 @@ socket.on('message', function(msg) {
         } else {
             $('#displayChat').append("<li  class='displayli'> <p style='color:#" + msg.color + ";'>" + msg.usernames + ":</p>" + msg.response + "</li><br>");
             audio.play();
-            audio.pause();
         }
         $('#displayChat').scrollTop($('#displayChat')[0].scrollHeight);
     }
