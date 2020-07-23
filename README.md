@@ -1,3 +1,3 @@
 # kikorcho
 
-http://newkikorcho.herokuapp.com/
+https://newkikorcho.herokuapp.com/
