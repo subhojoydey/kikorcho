@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "materialize-social": "^1.0.3",
     "mongodb": "^3.5.9",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "socket.io": "^2.3.0"
   }
 }
